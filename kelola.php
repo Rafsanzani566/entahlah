@@ -23,7 +23,7 @@
     <title>Kelola Data</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light mb-4">
+    <nav class="navbar navbar-light bg-light mb-4 shadow-sm">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">CRUD - PHP MySQL</a>
       </div>
@@ -51,7 +51,7 @@
                 <label for="jkel" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                 <div class="col-sm-10">
                     <select required id="jkel" name="jenis_kelamin" class="form-select">
-                        <option <?php if($jenis_kelamin == 'Laki-laki'){ echo "selected"; } ?> value="Laki-laki">Laki-laki</option>
+                        <option <?php if($jenis_kelamin == 'Laki-laki' || $jenis_kelamin == 'Laki Laki'){ echo "selected"; } ?> value="Laki-laki">Laki-laki</option>
                         <option <?php if($jenis_kelamin == 'Perempuan'){ echo "selected"; } ?> value="Perempuan">Perempuan</option>
                     </select>
                 </div>
