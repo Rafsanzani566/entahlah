@@ -1,5 +1,7 @@
 <?php
     include 'koneksi.php';
+    session_start();
+
     $id_siswa = ''; $nisn = ''; $nama = ''; $jenis_kelamin = ''; $alamat = '';
 
     if(isset($_GET['ubah'])){
@@ -25,7 +27,7 @@
 <body>
     <nav class="navbar navbar-light bg-light mb-4 shadow-sm">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">CRUD - PHP MySQL</a>
+        <a class="navbar-brand" href="#">Admin Panel</a>
       </div>
     </nav>
 
@@ -75,7 +77,7 @@
                 <div class="col">
                     <?php if(isset($_GET['ubah'])){ ?>
                         <button type="submit" name="aksi" value="edit" class="btn btn-primary">
-                            <i class="fa fa-floppy-disk"></i> Simpan Perubahan
+                            <i class="fa fa-floppy-disk"></i> Simpan
                         </button>
                     <?php } else { ?>
                         <button type="submit" name="aksi" value="add" class="btn btn-primary">

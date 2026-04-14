@@ -6,7 +6,12 @@ include 'koneksi.php';
         $nisn          = $data['nisn'];
         $nama          = $data['nama'];
         $jenis_kelamin = $data['jenis_kelamin'];
-        $foto          = $files['foto']['name'];
+
+        $split         = explode('.', $files['foto']['name']);
+        $ekstensi      = $split[count($split)-1];
+
+        $foto          = $nisn.'.'.$ekstensi;
+
         $alamat        = $data['alamat'];
 
         $dir = "img/";
@@ -35,9 +40,13 @@ include 'koneksi.php';
         if($files['foto']['name'] == ""){
             $foto = $result['foto_siswa'];
         } else {
-            $foto = $files['foto']['name'];
+
+            $split         = explode('.', $files['foto']['name']);
+            $ekstensi      = $split[count($split)-1];
+
+            $foto          = $result['nisn'].'.'.$ekstensi;
             @unlink("img/" . $result['foto_siswa']);
-            move_uploaded_file($files['foto']['tmp_name'], 'img/' . $files['foto']['name']);
+            move_uploaded_file($files['foto']['tmp_name'], 'img/' . $foto);
         }
 
         $query = "UPDATE siswa SET nisn='$nisn', nama='$nama', jenis_kelamin='$jenis_kelamin', alamat='$alamat', foto_siswa='$foto' WHERE id_siswa='$id_siswa';";

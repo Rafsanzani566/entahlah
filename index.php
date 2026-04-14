@@ -1,5 +1,7 @@
 <?php 
     include 'koneksi.php';
+    session_start();
+
     $query = "SELECT * FROM siswa;";
     $sql = mysqli_query($connect, $query);
     $no = 0;
@@ -9,14 +11,21 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <title>CRUD - Jagat Koding</title>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+    <title>Dashboard Admin</title>
 </head>
+
 <body class="bg-light">
-    <nav class="navbar navbar-light bg-light mb-4 shadow-sm">
+    <nav class="navbar navbar-light bg-white mb-4 shadow-sm">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">CRUD - PHP MySQL</a>
+        <a class="navbar-brand" href="#">Admin Panel</a>
       </div>
     </nav>
 
@@ -35,8 +44,18 @@
             <i class="fa fa-plus" style="-webkit-text-stroke: 1px white;"></i> Tambah Data
         </a>
 
-        <div class="table-responsive">
-            <table class="table align-middle table-bordered table-striped table-hover bg-white">
+        <?php if(isset($_SESSION['eksekusi'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong><?php echo $_SESSION['eksekusi']; ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php 
+            session_destroy();
+            endif; 
+        ?>
+
+        <div class="table-responsive card p-3 shadow-sm">
+            <table id="dt" class="table align-middle table-bordered table-striped hover">
                 <thead>
                     <tr>
                         <th><center>No.</center></th>
@@ -73,5 +92,17 @@
             </table>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dt').DataTable({
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
+            });
+        });
+    </script>
 </body>
 </html>
